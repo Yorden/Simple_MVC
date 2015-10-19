@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var CatModel;
+var DogModel;
 
 var DogSchema = new mongoose.Schema({
     name: {
