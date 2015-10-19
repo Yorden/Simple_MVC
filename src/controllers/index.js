@@ -3,8 +3,7 @@ var models = require('../models'); //pull in our models. This will automatically
 
 //get the Cat model
 var Cat = models.Cat.CatModel;
-//dog model
-var Dog = models.Dog.DogModel;
+
 
 //default fake data so that we have something to work with until we make a real Cat
 var defaultData = {
@@ -167,7 +166,7 @@ var setDogName = function(req, res) {
     var newDog = new Dog(dogData);
 
     //Save the newCat object to the database
-    newCat.save(function(err) {
+    newDog.save(function(err) {
         if(err) {
             return res.json({err:err}); //if error, return it
         }
