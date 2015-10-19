@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/app.js",
     "pretest": "jshint ./src",
-    "test": "echo \"tests complete\""
+    "test": ""
   },
   "author": "Cody Van De Mark",
   "license": "ISC",

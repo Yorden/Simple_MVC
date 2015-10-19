@@ -17,9 +17,8 @@ var DogSchema = new mongoose.Schema({
     },
     age:{
         type:Number,
-        trim:true,
+        trim:true
     },
-
     createdDate: {
         type: Date,
         default: Date.now

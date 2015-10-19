@@ -3,6 +3,9 @@ var models = require('../models'); //pull in our models. This will automatically
 
 //get the Cat model
 var Cat = models.Cat.CatModel;
+var Dog = models.Dog.DogModel;
+
+//console.log(Dog)
 
 
 //default fake data so that we have something to work with until we make a real Cat
@@ -162,7 +165,7 @@ var setDogName = function(req, res) {
         age: req.body.age
     };
 
-    //create a new object of CatModel with the object to save
+    //create a new object of DogModel with the object to save
     var newDog = new Dog(dogData);
 
     //Save the newCat object to the database
@@ -175,7 +178,7 @@ var setDogName = function(req, res) {
         lastAdded = newDog;
 
         //return success
-        return res.json({name: name});
+        return res.json({name: req.body.name});
     });
 };
 
@@ -219,21 +222,11 @@ var searchName = function(req,res) {
 
 var searchDogName = function(req,res) {
 
-    //check if there is a query parameter for name
-    //BUT WAIT!!?!
-    //Why is this req.query and not req.body like the others
-    //This is a GET request. Those come as query parameters in the URL
-    //For POST requests like the other ones in here, those come in a request body because they aren't a query
-    //POSTS send data to add while GETS query for a page or data (such as a search)
     if(!req.query.name) {
         return res.json({error: "Name is required to perform a search"});
     }
 
-    //Call our Cat's static findByName function. Since this is a static function, we can just call it without an object
-    //Methods like sayName are attached only to each object instance (not static)
-    //pass in a callback (like we specified in the Cat model
-    //Normally would you break this code up, but I'm trying to keep it together so it's easier to see how the system works
-    //For that reason, I gave it an anonymous callback instead of a named function you'd have to go find
+
     Dog.findByName(req.query.name, function(err, doc) {
         //errs, handle them
         if(err) {
@@ -248,7 +241,7 @@ var searchDogName = function(req,res) {
         //if a match, send the match back
         doc.age++;
 
-        return res.json({name: doc.name, beds: doc.bedsOwned});
+        return res.json({name: doc.name, age: doc.age});
     });
 
 };
@@ -298,5 +291,7 @@ module.exports = {
     setName: setName,
     updateLast: updateLast,
     searchName: searchName,
-    notFound: notFound
+    notFound: notFound,
+    searchDogName: searchDogName,
+    setDogName: setDogName
 };
